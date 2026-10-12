@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Search, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLoomeSession } from "@/lib/use-loome-session";
 
@@ -11,13 +11,10 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { data: session } = useLoomeSession();
-  const isHomePage = pathname === "/";
-  const isAuthPage = pathname === "/login" || pathname === "/register";
   const links = [
     { href: "/explore", label: "Explore" },
     { href: "/about", label: "About" },
-  ];
-  const loggedInLinks = [
+    { href: "/explore?sort=liked", label: "Trending" },
     { href: "/studio", label: "Studio" },
     ...(session?.user.role === "admin"
       ? [{ href: "/admin", label: "Admin" }]
@@ -34,54 +31,39 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b ${isHomePage ? "loome-home-header" : ""} ${isAuthPage ? "loome-auth-header border-transparent" : isScrolled ? "bg-white/60 backdrop-blur-2xl border-white/40 shadow-[0_8px_32px_rgba(100,60,150,.05)]" : "bg-transparent border-transparent"}`}
+      className={`loome-site-header fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b ${isScrolled ? "bg-white/60 backdrop-blur-2xl border-white/40 shadow-[0_8px_32px_rgba(100,60,150,.05)]" : "bg-transparent border-transparent"}`}
     >
-      <nav className={isHomePage ? "loome-home-nav" : "mx-auto flex h-[79px] max-w-[1300px] items-center justify-between px-5 lg:px-8"}>
+      <nav className="loome-site-nav" aria-label="Main navigation">
         <div className="flex flex-1 items-center justify-start">
           <Link
             href="/"
             className="flex items-center"
             onClick={() => setOpen(false)}
           >
-            <span className={isHomePage ? "loome-home-brand" : "text-[22px] font-semibold tracking-tight text-slate-950"}>
+            <span className="loome-site-brand">
               Loome
             </span>
           </Link>
         </div>
-        <div className={isHomePage ? "loome-home-nav-links" : "hidden flex-none items-center gap-10 lg:flex"}>
+        <div className="loome-site-nav-links">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={isHomePage ? "loome-home-nav-link" : `text-[15px] font-medium transition ${isActive(link.href) ? "text-slate-950" : "text-slate-600 hover:text-slate-950"}`}
+              className="loome-site-nav-link"
+              aria-current={isActive(link.href) ? "page" : undefined}
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/explore?sort=liked"
-            className={isHomePage ? "loome-home-nav-link" : "text-[15px] font-medium text-slate-600 transition hover:text-slate-950"}
-          >
-            Trending
-          </Link>
-          {(isHomePage || session) &&
-            loggedInLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={isHomePage ? "loome-home-nav-link" : `text-[15px] font-medium transition ${isActive(link.href) ? "text-slate-950" : "text-slate-600 hover:text-slate-950"}`}
-              >
-                {link.label}
-              </Link>
-            ))}
         </div>
-        <div className={isHomePage ? "loome-home-nav-actions" : "hidden flex-1 items-center justify-end gap-4 lg:flex"}>
+        <div className="loome-site-nav-actions">
           <Link
             href="/explore"
             aria-label="Search designs"
-            className={isHomePage ? "loome-home-search" : "grid h-10 w-10 place-items-center rounded-full text-slate-600 transition hover:bg-white/40 hover:text-slate-950"}
+            className="loome-site-search"
           >
-            {isHomePage ? <span className="loome-home-search-icon" aria-hidden="true" /> : <Search size={18} />}
+            <span className="loome-site-search-icon" aria-hidden="true" />
           </Link>
           {session ? (
             <Link
@@ -93,20 +75,14 @@ export function SiteHeader() {
           ) : (
             <Link
               href="/login"
-              className={isHomePage ? "loome-home-sign-in" : "px-4 py-2 text-[14px] font-medium text-slate-700 transition hover:text-slate-950"}
+              className="loome-site-sign-in"
             >
               Sign in
             </Link>
           )}
-          {!isHomePage && <Link
-            href="/upload"
-            className="loome-button loome-button-primary loome-button-sm"
-          >
-            Share a design
-          </Link>}
         </div>
         <button
-          className={isHomePage ? "loome-home-menu grid h-10 w-10 place-items-center rounded-full" : "grid h-10 w-10 place-items-center rounded-full lg:hidden"}
+          className="loome-site-menu grid h-10 w-10 place-items-center rounded-full"
           onClick={() => setOpen(!open)}
           aria-label="Toggle navigation"
           aria-expanded={open}
@@ -120,18 +96,15 @@ export function SiteHeader() {
         </button>
       </nav>
       {open && (
-        <div id="site-mobile-navigation" className={`border-t border-white/40 bg-white/80 backdrop-blur-2xl px-5 py-5 shadow-lg ${isHomePage ? "loome-home-mobile-navigation" : "lg:hidden"}`}>
+        <div id="site-mobile-navigation" className="loome-site-mobile-navigation border-t border-white/40 bg-white/80 backdrop-blur-2xl px-5 py-5 shadow-lg">
           <div className="flex flex-col gap-4">
-            {[
-              ...links,
-              { href: "/explore?sort=liked", label: "Trending" },
-              ...(isHomePage || session ? loggedInLinks : []),
-            ].map((link) => (
+            {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className="text-[15px] font-medium text-slate-800"
+                aria-current={isActive(link.href) ? "page" : undefined}
               >
                 {link.label}
               </Link>

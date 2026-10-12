@@ -352,20 +352,21 @@ a {
   height: auto;
 }
 
-/* The homepage navigation belongs to the hero's Figma frame. */
-.loome-home-header {
-  --hero-unit: 0.10060362173cqw;
+/* Shared navigation follows the hero's Figma design on every page. */
+.loome-site-header {
+  /* Preserve the page layouts' existing 79px header allowance. */
+  --hero-unit: min(0.10060362173cqw, 1.5368px);
   container-type: inline-size;
   font-feature-settings: "ss11" 1, "calt" 0, "liga" 0;
 }
-.loome-home-nav {
+.loome-site-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: calc(51.405 * var(--hero-unit));
   padding-inline: calc(44.822 * var(--hero-unit));
 }
-.loome-home-brand {
+.loome-site-brand {
   color: #020618;
   font-size: calc(14 * var(--hero-unit));
   font-weight: 700;
@@ -373,41 +374,41 @@ a {
   letter-spacing: .06em;
   text-transform: uppercase;
 }
-.loome-home-nav-links {
+.loome-site-nav-links {
   display: flex;
   flex: none;
   align-items: center;
   gap: calc(26.028 * var(--hero-unit));
 }
-.loome-home-nav-link {
+.loome-site-nav-link {
   color: #000;
   font-size: calc(12 * var(--hero-unit));
   font-weight: 500;
   line-height: calc(15.617 * var(--hero-unit));
   letter-spacing: -.011em;
 }
-.loome-home-nav-link:hover { opacity: .7; }
-.loome-home-nav-actions {
+.loome-site-nav-link:hover { opacity: .7; }
+.loome-site-nav-actions {
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: flex-end;
   gap: calc(10.411 * var(--hero-unit));
 }
-.loome-home-search {
+.loome-site-search {
   display: grid;
   place-items: center;
   width: calc(26.028 * var(--hero-unit));
   height: calc(26.028 * var(--hero-unit));
   border-radius: 50%;
 }
-.loome-home-search:hover { background: rgba(255, 255, 255, .4); }
-.loome-home-search-icon {
+.loome-site-search:hover { background: rgba(255, 255, 255, .4); }
+.loome-site-search-icon {
   width: calc(11.7125 * var(--hero-unit));
   height: calc(11.7125 * var(--hero-unit));
   background: url("/images/loome-hero-search.svg") center / contain no-repeat;
 }
-.loome-home-sign-in {
+.loome-site-sign-in {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -425,8 +426,8 @@ a {
   letter-spacing: -.011em;
   white-space: nowrap;
 }
-.loome-home-menu,
-.loome-home-mobile-navigation { display: none; }
+.loome-site-menu,
+.loome-site-mobile-navigation { display: none; }
 
 /* ── Eyebrow / kicker ── */
 .loome-kicker {
@@ -865,14 +866,6 @@ a {
   padding: 0;
   background: #fbfaff;
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-}
-.loome-auth-header {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(239, 248, 255, 0.68)),
-    radial-gradient(circle at 72% -80%, rgba(94, 173, 255, 0.42), transparent 62%);
-  border-bottom-color: rgba(147, 197, 253, 0.42);
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.12);
-  backdrop-filter: blur(22px) saturate(1.15);
 }
 .login-frame {
   display: grid;
@@ -1531,16 +1524,16 @@ a {
     bottom: -12px;
     width: 110vw;
   }
-  .loome-home-header { --hero-unit: 1px; }
-  .loome-home-nav {
+  .loome-site-header { --hero-unit: 1px; }
+  .loome-site-nav {
     height: 72px;
     padding-inline: 20px;
   }
-  .loome-home-brand { font-size: 20px; line-height: 28px; }
-  .loome-home-nav-links,
-  .loome-home-nav-actions { display: none; }
-  .loome-home-menu { display: grid; }
-  .loome-home-mobile-navigation { display: block; }
+  .loome-site-brand { font-size: 20px; line-height: 28px; }
+  .loome-site-nav-links,
+  .loome-site-nav-actions { display: none; }
+  .loome-site-menu { display: grid; }
+  .loome-site-mobile-navigation { display: block; }
 }
 @media (max-width: 640px) {
   .loome-section {
