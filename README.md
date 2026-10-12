@@ -2,7 +2,7 @@
 
 Loome is a design-sharing platform for publishing work, discovering visual ideas, and connecting with other designers. This repository contains the responsive Next.js frontend and the client-side authentication and platform routes.
 
-![Loome hero screenshot](./public/images/loome-hero.png)
+![Loome hero showcase mockup](./public/images/loome-hero.png)
 
 ## Project links
 

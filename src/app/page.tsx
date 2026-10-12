@@ -111,14 +111,16 @@ export default async function HomePage() {
       {/* ── Hero Section ── */}
       <section className="loome-hero relative isolate overflow-hidden">
         <div className="loome-hero-artwork" aria-hidden="true">
-          <Image
-            src="/images/loome-hero-gradient.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
+          <div className="loome-hero-gradient">
+            <Image
+              src="/images/loome-hero-gradient.png"
+              alt=""
+              fill
+              priority
+              sizes="170vw"
+              className="object-cover"
+            />
+          </div>
         </div>
         <div
           className="loome-hero-veil loome-hero-veil--top"
@@ -132,7 +134,7 @@ export default async function HomePage() {
         <div className="loome-hero-content">
           <div className="loome-hero-copy">
             <div className="loome-hero-pill">
-              <span />
+              <span aria-hidden="true" />
               Made for the curious designer
             </div>
 
@@ -149,10 +151,10 @@ export default async function HomePage() {
 
             <div className="loome-hero-actions">
               <Link href="/explore" className="loome-hero-secondary-action">
-                Explore design
+                Explore Design
               </Link>
               <Link href="/upload" className="loome-hero-primary-action">
-                Start sharing
+                Start Sharing
               </Link>
             </div>
           </div>
@@ -160,12 +162,12 @@ export default async function HomePage() {
 
         <div className="loome-hero-showcase">
           <Image
-            src="/images/loome-hero-showcase.png"
-            alt="A Loome design-sharing workspace preview"
-            width={1080}
-            height={426}
+            src="/images/loome-hero.webp"
+            alt="Three designers sharing ideas and creating together"
+            width={2169}
+            height={1236}
             priority
-            sizes="(max-width: 768px) 112vw, 1080px"
+            sizes="(max-width: 767px) 110vw, 72.74vw"
           />
         </div>
       </section>
